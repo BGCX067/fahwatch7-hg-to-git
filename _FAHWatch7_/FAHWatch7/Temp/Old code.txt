@@ -1,0 +1,497 @@
+﻿Temp file to hold long functions I'm working on, just to make it easier to go back if needed
+
+
+--Logparser ParseWorkunit
+
+Private Shared Function ParseWorkUnit(WorkUnit As clsWU, ByRef Lines As List(Of String), xInt As Int32, ByVal lStart As LogStartObject) As Boolean
+            Dim dtStart As DateTime = WorkUnit.dtStartDownload
+            Dim iAddDays As Int32 = 0
+            WriteDebug("-Starting unit parse from: " & WorkUnit.dtDownloaded.ToString("s"))
+            Do
+                'Declare iSkip for skipping to a line
+                Dim iSkip As Int32 = -1
+                Dim Line As String = Lines(xInt).ToUpperInvariant
+                Dim bDelayAdd As Boolean = False
+#If CONFIG = "Debug" Then
+                If HasMatch(WorkUnit, Line) Then
+                    WriteDebug("-ParseWorkUnit::" & Line)
+                End If
+#End If
+                'Check for iAddDays
+                Try
+                    If xInt - 1 > 0 And Lines(xInt).Length > 2 AndAlso Lines(xInt - 1).Length > 2 Then
+                        Try
+                            If Int32.Parse(Lines(xInt - 1).Replace(ChrW(34), "").Substring(0, 2), NumberStyles.Integer) > Int32.Parse(Lines(xInt).Replace(ChrW(34), "").Substring(0, 2), NumberStyles.Integer) Then
+                                iAddDays += 1
+                                WriteDebug("-Set iAddDays to " & iAddDays)
+                                Exit Try
+                                If xInt < Lines.Count - 1 And HasMatch(WorkUnit, Lines(xInt)) Then
+                                    bDelayAdd = True
+                                    WriteDebug("-DelayAdd = true")
+                                Else
+                                    iAddDays += 1
+                                    WriteDebug("-Set iAddDays to " & iAddDays)
+                                End If
+                            End If
+                        Catch ex As Exception : End Try
+                    End If
+                Catch ex As Exception
+                    'ignore 
+                End Try
+                'Check for new " Log Started "
+                If Line.Contains("******************************** DATE:") Then
+                    '******************************** Date: 21/01/12 ********************************
+                    Dim strFormat As String = "dd/MM/yy", provider As CultureInfo = CultureInfo.InvariantCulture
+                    dtStart = DateTime.ParseExact(Line.Substring(Line.IndexOf("DATE:") + 6, 8), strFormat, provider)
+                    iAddDays = 0
+                    WriteDebug("-Startdate set to " & dtStart.ToString("s"))
+                ElseIf Line.Contains("LOG STARTED") Then
+                    Try
+                        'Set new starting datetime, reset iAddDays
+                        dtStart = DateTime.Parse(Lines(xInt).Replace("*", "").Replace("Log Started", "").Trim.Replace("-", " "), CultureInfo.InvariantCulture)
+                        iAddDays = 0
+                        WriteDebug("-Startdate set to " & dtStart.ToString("s"))
+                    Catch ex As Exception
+                        WriteError(ex.Message, Err)
+                        Return False
+                    End Try
+                ElseIf (Line.Contains(strID(WorkUnit)) Or Line.Contains("UNIT " & WorkUnit.ID) Or Line.Contains("WU" & WorkUnit.ID)) AndAlso Line.Contains("CLEANING UP") Then
+                    'This shouldn't happen?
+                    WriteLog("Unexpected unit cleanup event detected!", eSeverity.Critical)
+                    WriteLog("-" & strID(WorkUnit) & Chr(32) & WorkUnit.PRCG & " - " & WorkUnit.unit, eSeverity.Critical)
+                    Dim nArr(200) As String
+                    Lines.CopyTo(xInt - 100, nArr, 0, 200)
+                    Dim strCheck As String = ""
+                    If nArr.Count > 0 Then
+                        strCheck = Join(nArr, Environment.NewLine)
+                    End If
+#If CONFIG = "Debug" Then
+                    WriteDebug(New String(GetChar("-", 1), 25))
+#Else
+                    WriteLog(New String(GetChar("-", 1), 25), eSeverity.Critical)
+#End If
+                    Dim i As Int32 = 0
+                    For Each Str As String In nArr
+#If CONFIG = "Debug" Then
+                        WriteDebug(i & " - " & Str)
+#Else
+                        writelog(i & " - " & Str,eSeverity.Critical)
+#End If
+                        i += 1
+                    Next
+#If CONFIG = "Debug" Then
+                    WriteDebug(New String(GetChar("-", 1), 25))
+#Else
+                    WriteLog(New String(GetChar("-", 1), 25), eSeverity.Critical)
+#End If
+                ElseIf (Line.Contains("WARNING: UNIT " & WorkUnit.ID) Or Line.Contains(strID(WorkUnit))) And Line.Contains("MIGRATING TO SLOT") Then
+                    'Migrate to other slot - continue parsing 
+                    WriteDebug("-Work unit has migrated to a new slot, change ID and continue")
+                    WorkUnit.Slot = Lines(xInt).Substring(Lines(xInt).IndexOf("migrating to Slot ") + Len("migrating to Slot "))
+                ElseIf WorkUnit.dtStarted = #1/1/2000# AndAlso (Line.Contains("UNIT " & WorkUnit.ID & ":") Or Line.Contains(strID(WorkUnit)) AndAlso Line.Contains("STARTING")) Then
+                    WorkUnit.dtStarted = dtStart.Date.AddDays(iAddDays).Add(TimeSpan.Parse(Lines(xInt).Substring(0, 8)))
+                    WriteDebug("-Setting dtStarted:" & WorkUnit.dtStarted.ToString(CultureInfo.CurrentCulture))
+                ElseIf WorkUnit.CoreVersion = "" AndAlso (Line.Contains("UNIT " & WorkUnit.ID) Or Line.Contains(strID(WorkUnit))) And Line.Contains(":VERSION ") Then
+                    WorkUnit.CoreVersion = Lines(xInt).Substring(Line.IndexOf("VERSION ") + 8).Trim
+                    WriteDebug("-Setting core version:" & WorkUnit.CoreVersion)
+                ElseIf (Line.Contains("UNIT " & WorkUnit.ID) Or Line.Contains(strID(WorkUnit))) And Line.Contains(":COMPILER ") Then
+                    '10:22:10:WU03:FS02:0x11:Compiler  : Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 14.00.50727.762 for 80x86 
+                    '04:50:08:Unit 01:Compiler  : Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 14.00.50727.762 for 80x86 
+                    Dim strTmp As String = Lines(xInt).Substring(Line.IndexOf("COMPILER"))
+                    If WorkUnit.CoreCompiler = "" Then
+                        WorkUnit.CoreCompiler = strTmp.Substring(strTmp.IndexOf(":") + 1).Trim
+                        WriteDebug("-Setting core compiler:" & WorkUnit.CoreCompiler)
+                    Else
+                        If Not WorkUnit.CoreCompiler = strTmp.Substring(strTmp.IndexOf(":") + 1).Trim Then
+                            WorkUnit.CoreCompiler = strTmp.Substring(strTmp.IndexOf(":") + 1).Trim
+                            WriteDebug("-Setting new core compiler:" & WorkUnit.CoreCompiler)
+                        End If
+                    End If
+                ElseIf WorkUnit.BoardType = "" AndAlso (Line.Contains("UNIT " & WorkUnit.ID & ":") Or Line.Contains("WU" & WorkUnit.ID)) AndAlso Line.Contains("BOARD TYPE:") Then
+                    WorkUnit.BoardType = Lines(xInt).Substring(Line.IndexOf("BOARD TYPE:") + 11).Trim
+                    WriteDebug("-Setting board type:" & WorkUnit.BoardType)
+                ElseIf (Line.Contains("UNIT " & WorkUnit.ID & ":") Or Line.Contains(":WU" & WorkUnit.ID & ":FS" & WorkUnit.Slot)) And Line.Contains("%") Then
+                    Try
+                        For xIP As Int32 = Lines(xInt).IndexOf("%") To 1 Step -1
+                            If Lines(xInt).Substring(xIP, 1) = " " Or Lines(xInt).Substring(xIP, 1) = "(" Then
+                                Try
+                                    ' Ignore percentage if already known
+                                    If Lines(xInt).Substring(xIP, Lines(xInt).IndexOf("%") - xIP).Trim.Replace("(", "").Trim = "0" Then
+                                        'ignore 0% untill all core's report it
+                                        If WorkUnit.dtStarted = #1/1/2000# Then
+                                            WorkUnit.dtStarted = dtStart.Date.AddDays(iAddDays).Add(TimeSpan.Parse(Lines(xInt).Substring(0, 8)))
+                                            WriteDebug("-Setting unit start to " & WorkUnit.dtStarted.ToString(CultureInfo.CurrentCulture))
+                                        End If
+                                        Exit For
+                                    Else
+                                        If WorkUnit.Frames.Count > 0 Then
+                                            If WorkUnit.Frames(WorkUnit.Frames.Count - 1).FrameDT > dtStart.Date.AddDays(iAddDays).Add(TimeSpan.Parse(Lines(xInt).Substring(0, 8))) Then
+                                                WriteLog("Datetime of last and previous frame's are not in order, skipping frame ( " & WorkUnit.unit & Chr(32) & " LogLine: " & Line)
+#If CONFIG = "Debug" Then
+                                                'Auto correct?
+                                                WriteDebug("datetime of current/previous frame and new frame don't match!")
+                                                WriteDebug("-Last frame timestamp: " & WorkUnit.Frames(WorkUnit.Frames.Count - 1).FrameDT.ToString("s"))
+                                                WriteDebug("-Last frame log line:  " & WorkUnit.Frames(WorkUnit.Frames.Count - 1).LogString)
+                                                Dim nArr(200) As String
+                                                Lines.CopyTo(xInt - 100, nArr, 0, 200)
+                                                Dim strCheck As String = ""
+                                                If nArr.Count > 0 Then
+                                                    strCheck = Join(nArr, Environment.NewLine)
+                                                End If
+                                                WriteDebug("-------------------------------------------")
+                                                Dim i As Int32 = 0
+                                                For Each Str As String In nArr
+                                                    WriteDebug(i & " - " & Str)
+                                                    i += 1
+                                                Next
+                                                WriteDebug("-------------------------------------------")
+#Else
+                                                WriteDebug("-Failed to parse a frame")
+                                                WriteDebug("datetime of current/previous frame and new frame don't match!")
+                                                WriteDebug("-Last frame timestamp: " & WorkUnit.Frames(WorkUnit.Frames.Count - 1).FrameDT.ToString("s"))
+                                                WriteDebug("-Last frame log line:  " & WorkUnit.Frames(WorkUnit.Frames.Count - 1).LogString)
+#End If
+                                            Else
+                                                GoTo AddWorkUnit
+                                            End If
+                                        Else
+AddWorkUnit:
+                                            If CShort(Lines(xInt).Substring(xIP, Lines(xInt).IndexOf("%") - xIP).Trim.Replace("(", "").Trim) <= WorkUnit.activeFrame.Percentage Then
+                                                ' Ignore
+                                                ' Console.WriteLine("Frame restarted")
+                                            Else
+                                                If WorkUnit.AddFrame(Lines(xInt), dtStart.Date.AddDays(iAddDays).Add(TimeSpan.Parse(Lines(xInt).Substring(0, 8)))) Then
+                                                    If modMySettings.ConvertUTC Then
+                                                        WriteDebug("-Added a frame, progress: " & WorkUnit.Frames(WorkUnit.Frames.Count - 1).strPercentage & "%" & " frame datetime: " & WorkUnit.Frames(WorkUnit.Frames.Count - 1).FrameDT.AddHours(WorkUnit.ClientInfo.UTC_Offset).ToString(CultureInfo.CurrentCulture))
+                                                    Else
+                                                        WriteDebug("-Added a frame, progress: " & WorkUnit.Frames(WorkUnit.Frames.Count - 1).strPercentage & "%" & " frame datetime: " & WorkUnit.Frames(WorkUnit.Frames.Count - 1).FrameDT.ToString("s"))
+                                                    End If
+                                                Else
+#If CONFIG = "Debug" Then
+                                                    'Auto correct?
+                                                    Dim nArr(200) As String
+                                                    Lines.CopyTo(xInt - 100, nArr, 0, 200)
+                                                    Dim strCheck As String = ""
+                                                    If nArr.Count > 0 Then
+                                                        strCheck = Join(nArr, Environment.NewLine)
+                                                    End If
+                                                    Console.WriteLine("datetime of current/previous frame and new frame don't match!")
+                                                    Console.WriteLine("-Last frame timestamp: " & WorkUnit.Frames(WorkUnit.Frames.Count - 1).FrameDT.ToString("s"))
+                                                    Console.WriteLine("-Last frame log line:  " & WorkUnit.Frames(WorkUnit.Frames.Count - 1).LogString)
+                                                    Console.WriteLine("-------------------------------------------")
+                                                    Dim i As Int32 = 0
+                                                    For Each Str As String In nArr
+                                                        Console.WriteLine(i & " - " & Str)
+                                                        i += 1
+                                                    Next
+                                                    Console.WriteLine("-------------------------------------------")
+#Else
+                                                    WriteDebug("-Failed to parse a frame")
+                                                    WriteDebug("datetime of current/previous frame and new frame don't match!")
+                                                    WriteDebug("-Last frame timestamp: " & WorkUnit.Frames(WorkUnit.Frames.Count - 1).FrameDT.ToString("s"))
+                                                    WriteDebug("-Last frame log line:  " & WorkUnit.Frames(WorkUnit.Frames.Count - 1).LogString)
+#End If
+                                                End If
+                                            End If
+
+                                        End If
+                                        WorkUnit.Percentage = Lines(xInt).Substring(xIP, Lines(xInt).IndexOf("%") - xIP).Trim.Replace("(", "").Trim
+                                        WriteDebug("-Setting progress:" & WorkUnit.Percentage & " at: UTC - " & dtStart.Date.AddDays(iAddDays).Add(TimeSpan.Parse(Lines(xInt).Substring(0, 8))).ToString(CultureInfo.CurrentCulture) & " local - " & dtStart.Date.AddDays(iAddDays).Add(TimeSpan.Parse(Lines(xInt).Substring(0, 8))).AddHours(WorkUnit.ClientInfo.UTC_Offset).ToString(CultureInfo.CurrentCulture))
+                                        Exit For
+                                    End If
+                                Catch ex As Exception
+                                    WriteError(ex.Message, Err)
+                                    Return False
+                                End Try
+                            End If
+                            '/xIP index of percentage parsing
+                        Next
+                    Catch ex As Exception
+                        WriteError(ex.Message, Err)
+                        Return False
+                    End Try
+                ElseIf (Line.Contains("WARNING: UNIT " & WorkUnit.ID) Or Line.Contains(strID(WorkUnit))) AndAlso Line.Contains("DUMPING") Or _
+                     (Line.Contains("WARNING:WU" & WorkUnit.ID & ":SLOT ID " & WorkUnit.Slot) And Line.Contains("DUMPING")) Or _
+                     (Line.Contains("WARNING:WU" & WorkUnit.ID & ":SLOT ID " & WorkUnit.Slot.Substring(1, 1)) And Line.Contains("DUMPING")) Then
+                    '22:06:53:WARNING:WU00:Slot ID 0 no longer exists and there are no other matching slots, dumping
+                    WriteDebug("-Dumping unit detected")
+                    WorkUnit.ServerResponce = "dumped" 'lines(xInt).Substring(9)
+                    If WorkUnit.CoreStatus = "" Then WorkUnit.CoreStatus = "dumped"
+                    WorkUnit.dtCompleted = dtStart.Date.AddDays(iAddDays).Add(TimeSpan.Parse(Line.Substring(0, 8)))
+                    Dim iStart As Int32
+                    If Not GetIStart(Lines, xInt, WorkUnit, iStart) Then
+                        Return False
+                    ElseIf iStart = -1 Then
+                        WriteLog("Getting a core snippet start index for unit " & strID(WorkUnit) & Chr(32) & WorkUnit.PRCG & Chr(32) & WorkUnit.unit & Chr(32) & "failed", eSeverity.Critical)
+                        WriteLog("- Please report the failure and include the content of log file " & WorkUnit.Log)
+                        Return False
+                    End If
+                    Dim iEnd As Int32
+                    If Not GetIEnd(Lines, xInt, WorkUnit, iEnd, lStart) Then
+                        Return False
+                    ElseIf iEnd = -1 Then
+                        WriteLog("Work unit can be finalized, keeping in queue")
+                        Return False
+                    ElseIf iEnd = Int32.MinValue Then
+                        WriteDebug("-Skipping create core snippet")
+                        iSkip = WorkUnit.iSkip
+                        GoTo NextLine
+                    End If
+                    If CreateCoreSnippet(Lines, iStart, iEnd, WorkUnit) Then
+                        Return True
+                    Else
+                        WriteLog("Creating core snippet for unit " & strID(WorkUnit) & Chr(32) & WorkUnit.PRCG & Chr(32) & WorkUnit.unit & Chr(32) & "failed", eSeverity.Critical)
+                        WriteLog("- Please report the failure and include the content of log file " & WorkUnit.Log)
+                        Return False
+                    End If
+                ElseIf (Line.Contains("FAHCORE, RUNNING UNIT " & WorkUnit.ID) Or (Line.Contains("FAHCORE RUNNING UNIT " & WorkUnit.ID)) AndAlso Line.Contains("RETURNED")) Or _
+(Line.Contains(strID(WorkUnit)) And Line.Contains("FAHCORE RETURNED:")) Then
+                    Dim strTmp As String = Lines(xInt).Substring(Lines(xInt).ToUpperInvariant.IndexOf("RETURNED:") + 10).Trim
+                    If strTmp.Contains("110") Then
+                        WriteDebug("-Skipping core outdated core status")
+                        GoTo NextLine
+                    ElseIf strTmp.ToUpperInvariant.Contains("INTERRUPTED") Then
+                        WriteDebug("-Skipping INTERRUPTED Core Status")
+                        GoTo NextLine
+                    ElseIf strTmp.ToUpperInvariant.Contains("TERMINATED") Then
+                        WriteDebug("-Skipping TERMINATED Core Status")
+                        GoTo NextLine
+                    End If
+                    'Unit completion - corestatus - submitted - snippet
+                    WorkUnit.CoreStatus = strTmp
+                    WorkUnit.dtCompleted = dtStart.Date.AddDays(iAddDays).Add(TimeSpan.Parse(Lines(xInt).Substring(0, 8)))
+                    WriteDebug("-FahCore returned value: " & WorkUnit.CoreStatus)
+                    'Skipping CoreOutdated message.
+                    Dim iStart As Int32
+                    If Not GetIStart(Lines, xInt, WorkUnit, iStart) Then
+                        Return False
+                    ElseIf iStart = -1 Then
+                        Return False
+                    End If
+                    Dim iEnd As Int32
+                    If Not GetIEnd(Lines, xInt, WorkUnit, iEnd, lStart) Then
+                        Return False
+                    ElseIf iEnd = -1 Then
+                        WriteDebug("Work unit can be finalized, keeping in queue")
+                        Return False
+                    ElseIf iEnd = Int32.MinValue Then
+                        iSkip = WorkUnit.iSkip
+                        GoTo NextLine
+                    End If
+                    If CreateCoreSnippet(Lines, iStart, iEnd, WorkUnit) Then
+                        Return True
+                    Else
+                        WriteLog("Creating core snippet for unit " & strID(WorkUnit) & Chr(32) & WorkUnit.PRCG & Chr(32) & WorkUnit.unit & Chr(32) & "failed", eSeverity.Critical)
+                        WriteLog("- Please report the failure and include the content of log file " & WorkUnit.Log)
+                        Return False
+                    End If
+                    '/
+                End If
+                '/xInt - line index for lines parsing
+NextLine:
+                'Application.DoEvents()
+                Try
+                    'If bDelayAdd Then
+                    '    bDelayAdd = False
+                    '    iAddDays += 1
+                    '    WriteDebug("-iAddDays delayed increment")
+                    '    If WorkUnit.unit = "0x0000005d6652edca4edede58fd7f4593" Then Console.WriteLine("-IAddDays delayed increment")
+                    'End If
+                    If xInt = Lines.Count - 1 Then
+                        'Store not finalized work units in db with line index!
+                        Return True
+                    End If
+                    If iSkip = -1 Then
+                        xInt += 1
+                    Else
+                        xInt = iSkip
+                        iSkip = -1
+                    End If
+                Catch ex As Exception
+                    WriteDebug("Exception in unit parsing loop!")
+                    WriteError(ex.Message, Err)
+                    Return False
+                End Try
+                '/xInt increment
+            Loop
+        End Function
+
+--Logparser GetIEnd
+
+Private Shared Function GetIEnd(comLog As List(Of String), iStart As Int32, <Out()> WorkUnit As clsWU, ByRef Result As Int32, ByVal lStart As LogStartObject) As Boolean
+            Result = -1
+            Try
+                Dim iAddDays As Int32 = 0
+                For xInt As Int32 = iStart To comLog.Count - 1
+                    Dim Line As String = comLog(xInt).ToUpperInvariant
+#If CONFIG = "Debug" Then
+                    WriteDebug("-iEnd- work unit: " & strID(WorkUnit))
+                    WriteDebug("-iend- " & Line)
+#End If
+                    Try
+                        If Int32.Parse(comLog(xInt - 1).Substring(0, 2), NumberStyles.Integer) > Int32.Parse(comLog(xInt).Substring(0, 2), NumberStyles.Integer) Then
+                            iAddDays += 1
+                            WriteDebug("Added a day to iAddDays, current value:" & iAddDays & " - current date:" & WorkUnit.utcCompleted.Date.AddDays(iAddDays).Add(TimeSpan.Parse(comLog(xInt).Substring(0, 8))))
+                        End If
+                    Catch ex As Exception : End Try
+                    If Line.Contains("UNIT " & WorkUnit.ID & ": UPLOADING ") Or Line.Contains(strID(WorkUnit) & ":UPLOADING") Then
+                        '23:03:08:Unit 01: Uploading 632B
+                        '06:02:28:UNIT 00: UPLOADING 256.55KIB TO 171.64.65.102
+                        WorkUnit.dtStartUpload = WorkUnit.utcCompleted.Date.AddDays(iAddDays).Add(TimeSpan.Parse(Line.Substring(0, 8)))
+                        If WorkUnit.UploadSize = "" Then
+                            WorkUnit.UploadSize = comLog(xInt).Substring(Line.IndexOf("UPLOADING ") + Len("Uploading "))
+                            If WorkUnit.UploadSize.IndexOf(" ") > 0 Then
+                                WorkUnit.UploadSize = WorkUnit.UploadSize.Substring(0, WorkUnit.UploadSize.IndexOf(" "))
+                            End If
+                            If Line.IndexOf(" TO ") > 0 Then
+                                WorkUnit.CS = Line.Substring(Line.IndexOf(" TO ") + 4)
+                            End If
+                            WriteDebug("Detected upload, upload size:" & WorkUnit.UploadSize & " CS:" & WorkUnit.CS)
+                        ElseIf Line.IndexOf(" TO ") > 0 Then
+                            If WorkUnit.CS <> Line.Substring(Line.IndexOf(" TO ") + 4) Then
+                                WorkUnit.CS = Line.Substring(Line.IndexOf(" TO ") + 4)
+                                WriteDebug("-Changed submission server to " & WorkUnit.CS)
+                            End If
+                        End If
+                    ElseIf Line.Contains("UNIT " & WorkUnit.ID & ": UPLOAD COMPLETE") Or Line.Contains(strID(WorkUnit) & ":UPLOAD COMPLETE") Then
+                        '11:44:44:Server responded WORK_ACK (400)
+                        '11:44:44:Cleaning up Unit 09
+                        'OR
+                        '01:24:26:Unit 08: Upload complete
+                        '01:24:26:Server responded WORK_ACK (400)
+                        '01:24:26:Final credit estimate, 2012.00 points
+                        '01:24:26:Cleaning up Unit 08
+                        'OR
+                        '23:07:56:WU03:FS01:Upload complete
+                        '23:07:56:WU03:FS01:Server responded WORK_ACK (400)
+                        '23:07:56:WU03:FS01:Final credit estimate, 213.00 points
+                        WorkUnit.dtSubmitted = WorkUnit.utcCompleted.Date.AddDays(iAddDays).Add(TimeSpan.Parse(Line.Substring(0, 8)))
+                        WriteDebug("Found upload completed event at " & WorkUnit.utcSubmitted.ToString("s", CultureInfo.InvariantCulture.DateTimeFormat))
+                        For zInt As Int32 = xInt To comLog.Count - 1
+                            Dim zLine As String = comLog(zInt).ToUpperInvariant
+                            If zLine.Contains("SERVER RESPONDED ") And Not zLine.Contains(strID(WorkUnit)) Then
+                                WorkUnit.ServerResponce = comLog(zInt).Substring(zLine.IndexOf("SERVER RESPONDED ") + Len("SERVER RESPONDED "))
+                                WriteDebug("-Response found:" & WorkUnit.ServerResponce)
+                            ElseIf zLine.Contains(strID(WorkUnit) & ":SERVER RESPONDED") Then
+                                WorkUnit.ServerResponce = comLog(zInt).Substring(zLine.IndexOf("SERVER RESPONDED ") + Len("SERVER RESPONDED "))
+                                WriteDebug("-Response found(2):" & WorkUnit.ServerResponce)
+                            ElseIf zLine.Contains("FINAL CREDIT ESTIMATE") And WorkUnit.Credit = "" And Not zLine.ToUpper.Contains(strID(WorkUnit)) Then
+                                Try
+                                    Dim strPoints As String = zLine.Trim(Chr(10)).Substring(zLine.Trim(Chr(10)).IndexOf("ESTIMATE,") + 9).Replace("POINTS", "").Trim
+                                    'Dim strPoints As String = zLine.Trim(Chr(10)).Substring(32).Replace("POINTS", "")
+                                    If CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator <> "." Then
+                                        strPoints = strPoints.Replace(".", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator)
+                                    End If
+                                    WorkUnit.Credit = FormatPPD(strPoints)
+                                Catch ex As Exception
+                                    WriteError(ex.Message, Err)
+                                    Return False
+                                Finally
+                                    WriteDebug("-Server reported credit estimate: " & WorkUnit.Credit)
+                                End Try
+                            ElseIf zLine.Contains(strID(WorkUnit) & ":FINAL CREDIT ESTIMATE") And WorkUnit.Credit = "" Then
+                                Try
+                                    Dim strPoints As String = zLine.Trim(Chr(10)).Substring(zLine.Trim(Chr(10)).IndexOf("ESTIMATE,") + 9).Replace("POINTS", "").Trim
+                                    'Dim strPoints As String = zLine.Trim(Chr(10)).Substring(32).Replace(" POINTS ESTIMATE,", "").Trim
+                                    If CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator <> "." Then
+                                        strPoints = strPoints.Replace(".", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator)
+                                    End If
+                                    WorkUnit.Credit = FormatPPD(strPoints)
+                                Catch ex As Exception
+                                    WriteError(ex.Message, Err)
+                                    Return False
+                                Finally
+                                    WriteDebug("-Server reported credit estimate: " & WorkUnit.Credit)
+                                End Try
+                            ElseIf zLine.Contains("CLEANING UP UNIT " & WorkUnit.ID) Or zLine.Contains(strID(WorkUnit) & ":CLEANING UP") Then
+                                'This should not happen before any upload, server responce and credit estimate has been found
+                                Result = xInt
+                                WriteDebug("-Cleaning up detected - Accrediting " & WorkUnit.unit)
+                                'WorkUnit = AccreditWorkunit(WorkUnit)
+                                If Not AccreditWorkunit(WorkUnit) Then
+                                    Return False
+                                Else
+                                    Return True
+                                End If
+                            End If
+                        Next
+                        WriteLog("Unit: " & WorkUnit.unit & " can't find cleanup event!", eSeverity.Critical)
+                        Result = Int32.MinValue
+                        Return False
+                    ElseIf Line.Contains("STARTING UNIT " & WorkUnit.ID) Or Line.Contains(strID(WorkUnit) & ":STARTING") Then
+                        WriteDebug("-Unit seems to be restarted")
+                        WorkUnit.bHasRestarted = True
+                        WorkUnit.iSkip = Int32.MinValue
+                        If WorkUnit.Frames.Count >= 1 Then
+                            WorkUnit.restartInfo.AddRestart(WorkUnit.CoreStatus, WorkUnit.Frames(WorkUnit.Frames.Count - 1))
+                        Else
+                            'Check!
+                            WorkUnit.restartInfo.AddRestart(WorkUnit.CoreStatus, New clsWU.clsFrame(comLog(xInt).Substring(0, 8) & "Unit 18:Completed INVALID out of INVALID steps  (0%)", WorkUnit.dtDownloaded))
+                        End If
+                        'Check to clear frames
+                        For zInt As Int32 = xInt To comLog.Count - 1
+                            'FahCore, running Unit 13, returned:
+                            If (comLog(zInt).ToUpperInvariant.Contains("FAHCORE, RUNNING UNIT " & WorkUnit.ID & ", RETURNED:") Or comLog(zInt).ToUpperInvariant.Contains("FAHCORE RUNNING UNIT " & WorkUnit.ID & ", RETURNED:")) Or _
+                                comLog(zInt).ToUpperInvariant.Contains("WU" & WorkUnit.ID & ":FS" & WorkUnit.Slot & ":FAHCORE RETURNED") Then
+                                'WorkUnit.iSkip = zInt - 1
+                                WorkUnit.iSkip = zInt
+                                Result = Int32.MinValue
+                                Return True
+                            ElseIf (comLog(zInt).ToUpperInvariant.Contains("UNIT " & WorkUnit.ID & ":") And comLog(zInt).Contains("%")) Or _
+    (comLog(zInt).ToUpperInvariant.Contains("WU" & WorkUnit.ID & ":FS" & WorkUnit.Slot) And comLog(zInt).ToUpperInvariant.Contains("COMPLETED") And comLog(zInt).ToUpper.Contains("%")) Then
+                                For xIP As Int32 = comLog(zInt).IndexOf("%", 0, System.StringComparison.InvariantCulture) To 1 Step -1
+                                    If comLog(zInt).Substring(xIP, 1) = " " Or comLog(zInt).Substring(xIP, 1) = "(" Then
+                                        If WorkUnit.Percentage = comLog(zInt).Substring(xIP, comLog(zInt).IndexOf("%") - xIP).Trim.Replace("(", "").Trim Then
+                                            'Don't clear frames, continue parsing unit from xIP
+                                            WriteDebug("-Unit has been restarted from the same checkpoint, continue parsing from " & zInt)
+                                            WorkUnit.iSkip = zInt
+                                            'return minvalue and continue parsing in main function from iSkip
+                                            Result = Int32.MinValue
+                                            Return True
+                                        ElseIf WorkUnit.Percentage <> "" Then
+                                            If Int32.Parse(WorkUnit.Percentage, NumberStyles.Integer) > Int32.Parse(comLog(zInt).Substring(xIP, comLog(zInt).IndexOf("%") - xIP).Trim.Replace("(", "").Trim, NumberStyles.Integer) Then
+                                                'Clear frames before new percentage 
+                                                WriteDebug("-Unit has been restarted from " & comLog(zInt).Substring(xIP, comLog(zInt).IndexOf("%") - xIP).Trim.Replace("(", "").Trim & ", clearing redundant frame info and continuing to parse unit from " & zInt)
+                                                WorkUnit.ClearFrames(CInt(comLog(zInt).Substring(xIP, comLog(zInt).IndexOf("%") - xIP).Trim.Replace("(", "").Trim))
+                                                'set iSkip to xInt and continue parsing
+                                                WorkUnit.iSkip = zInt
+                                                'return minvalue and continue parsing in main function from iSkip
+                                                Result = Int32.MinValue
+                                                Return True
+                                            End If
+                                        End If
+                                    End If
+                                    '/xIP stripping down to progress
+                                Next
+                                WriteDebug("oops")
+                            End If
+                            '/zInt looking for frame clear
+                        Next
+                    ElseIf Line.Contains("CLEANING UP UNIT " & WorkUnit.ID) Or Line.Contains(strID(WorkUnit) & ":CLEANING UP") Or Line.Contains(":WU" & WorkUnit.ID & ":CLEANING UP") Then
+                        'This should not happen before any upload, server responce and credit estimate has been found
+                        Result = xInt
+                        WriteDebug("-Cleaning up detected - Finalizing " & WorkUnit.unit)
+                        'WorkUnit = AccreditWorkunit(WorkUnit)
+                        If Not AccreditWorkunit(WorkUnit) Then
+                            WriteDebug("-Failed to accredit work unit: " & WorkUnit.ClientName & "-" & strID(WorkUnit) & ":" & WorkUnit.PRCG)
+                            Return False
+                        End If
+                        WriteDebug("Finalized work unit " & WorkUnit.unit)
+                        Return True
+                    End If
+                    '/xInt looking for upload or dump event 
+                Next
+                If Result = -1 Then
+                    Return False
+                Else
+                    Return True
+                End If
+            Catch ex As Exception
+                WriteError(ex.Message, Err)
+                Return False
+            Finally
+                '#If CONFIG = "Debug" Then
+                '                DebugOutput = bOld
+                '#End If
+            End Try
+        End Function

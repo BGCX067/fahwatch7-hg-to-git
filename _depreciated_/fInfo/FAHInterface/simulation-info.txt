@@ -1,0 +1,29 @@
+PyON 1 simulation-info
+{
+  "user": "Marvin_The_Martian",
+  "team": "11314",
+  "project": 6067,
+  "run": 1,
+  "clone": 171,
+  "gen": 175,
+  "core_type": 163,
+  "core": "GROGBSMP",
+  "description": "",
+  "total_iterations": 500,
+  "iterations_done": 475,
+  "energy": 0,
+  "temperature": 0,
+  "start_time": "15/Apr/2011-23:44:59",
+  "timeout": 0,
+  "deadline": 429003651477979520,
+  "run_time": 285236,
+  "simulation_time": 0,
+  "eta": 13905,
+  "news": ""
+}
+---
+>
+  "deadline": 429003651477979520,
+  "run_time": 285236,
+  "simulation_time": 0,
+  "et

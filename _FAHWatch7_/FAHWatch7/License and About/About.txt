@@ -1,0 +1,18 @@
+﻿FAHWatch7 strives to become your one stop solution to monitor, manage and analyze your Folding@Home clients
+
+For a longer description, see the projects home page - http://http://code.google.com/p/cftunity/
+
+
+Big thanks to the following people without which I would not have been able to put this together!
+
+* guest3412
+* GreyWhiskers
+* bruce
+* Ivoshiee
+* uncle fuzzy
+* Grandpa_01
+* ChelseaOilman
+* jimerickson
+* rhavern
+
+( I lost my last list, I might have forgotten someone who should be named :oops: )

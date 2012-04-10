@@ -1,0 +1,585 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{72D64EBC-A2BD-42AD-8638-F505782B7900}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>FAHWatch7.My.MyApplication</StartupObject>
+    <RootNamespace>FAHWatch7</RootNamespace>
+    <AssemblyName>FAHWatch7_preview</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationVersion>0.1.0.7</ApplicationVersion>
+    <UseApplicationTrust>true</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>..\Release\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>
+    </NoWarn>
+    <WarningsAsErrors>41998,41999,42004,42016,42017,42018,42019,42020,42021,42022,42025,42026,42029,42030,42031,42032,42036,42104,42105,42106,42107,42108,42109,42353,42354,42355</WarningsAsErrors>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Optimize>false</Optimize>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Release\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>
+    </NoWarn>
+    <WarningsAsErrors>41998,41999,42004,42016,42017,42018,42019,42020,42021,42022,42025,42026,42029,42030,42031,42032,42036,42104,42105,42106,42107,42108,42109,42353,42354,42355</WarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <DefineConstants>
+    </DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>On</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\iTray.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>E0D7459D393BB9B66EB95C54B8A6E8956DB82FDC</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>FAHWatch7_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'tpfMargin|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\tpfMargin\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <WarningsAsErrors>41998,41999,42004,42016,42017,42018,42019,42020,42021,42022,42025,42026,42029,42030,42031,42032,42036,42104,42105,42106,42107,42108,42109,42353,42354,42355</WarningsAsErrors>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ExceptionSender, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\ExceptionSender.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.66.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <HintPath>external\System.Data.SQLite.DLL</HintPath>
+    </Reference>
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="ZedGraph, Version=5.1.5.28844, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\FAHWatch7\FAHWatch7\external\ZedGraph.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationEvents and startup\ApplicationEvents.vb" />
+    <Compile Include="Extensions\ReturnCheck.vb" />
+    <Compile Include="FAHClient\clsClient.vb" />
+    <Compile Include="FAHClient\clsWU.vb" />
+    <Compile Include="Form containers\clsAbout.vb" />
+    <Compile Include="Form containers\clsAddClient.vb" />
+    <Compile Include="ApplicationEvents and startup\clsAppContext.vb" />
+    <Compile Include="FAHClient\clsClientConfig.vb" />
+    <Compile Include="FAHClient\clsClientInfo.vb" />
+    <Compile Include="FAHClient\Clients.vb" />
+    <Compile Include="InstallHelper\InstallHelper.vb" />
+    <Compile Include="LegacyClients\clsQueue.vb" />
+    <Compile Include="Loging and Exception handling\diagExceptionIgnoreList.Designer.vb">
+      <DependentUpon>diagExceptionIgnoreList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Loging and Exception handling\diagExceptionIgnoreList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Loging and Exception handling\ExceptionReport.Designer.vb">
+      <DependentUpon>ExceptionReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Loging and Exception handling\ExceptionReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Loging and Exception handling\Exceptions.vb" />
+    <Compile Include="LogViewer\frmLogViewer.Designer.vb">
+      <DependentUpon>frmLogViewer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="LogViewer\frmLogViewer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogViewer\LogViewer.vb" />
+    <Compile Include="mySettings\AffinityPriorityOverride.vb" />
+    <Compile Include="mySettings\diagClearSettings.Designer.vb">
+      <DependentUpon>diagClearSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="mySettings\diagClearSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mySettings\frmAffinity.Designer.vb">
+      <DependentUpon>frmAffinity.vb</DependentUpon>
+    </Compile>
+    <Compile Include="mySettings\frmAffinity.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mySettings\frmMail.Designer.vb">
+      <DependentUpon>frmMail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="mySettings\frmMail.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mySettings\Mail.vb" />
+    <Compile Include="Notifications\Notifications.vb" />
+    <Compile Include="Notifications\Notify.Designer.vb">
+      <DependentUpon>Notify.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Notifications\Notify.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Notifications\TrayNotification.vb" />
+    <Compile Include="ProjectInfo\ppdGrapher.Designer.vb">
+      <DependentUpon>ppdGrapher.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectInfo\ppdGrapher.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sqlite db\clsData.vb" />
+    <Compile Include="EOC\clsEOC.vb" />
+    <Compile Include="EventLog parser\clsEventLog.vb" />
+    <Compile Include="Extensions\clsFBExtension.vb" />
+    <Compile Include="Form containers\clsFilters.vb" />
+    <Compile Include="Form containers\clsLicense.vb" />
+    <Compile Include="Extensions\clsListViewColumnSorter.vb" />
+    <Compile Include="Logparser\clsLogFile.vb" />
+    <Compile Include="Logparser\clsLogParser.vb" />
+    <Compile Include="Loging and Exception handling\clsLogwindow.vb" />
+    <Compile Include="NativeMethods\clsNativeMethods.vb" />
+    <Compile Include="Extensions\clsNETAPI.vb" />
+    <Compile Include="Timers\Timers.vb" />
+    <Compile Include="Tools\frmTools.Designer.vb">
+      <DependentUpon>frmTools.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\frmTools.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logparser\LogStartObject.vb" />
+    <Compile Include="DelegateFactory\delegateFactory.vb" />
+    <Compile Include="EOC\frmEOC.Designer.vb">
+      <DependentUpon>frmEOC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EOC\frmEOC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mySettings\frmGraphSettings.Designer.vb">
+      <DependentUpon>frmGraphSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="mySettings\frmGraphSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ApplicationEvents and startup\modApplicationEntryPoint.vb" />
+    <Compile Include="TrayIcon\modIcon.vb" />
+    <Compile Include="Modules\modLinkDemand.vb" />
+    <Compile Include="mySettings\modMySettings.vb" />
+    <Compile Include="Statistics\clsStatistics.vb" />
+    <Compile Include="Form containers\clsZGRAPH.vb" />
+    <Compile Include="CustomEvents\customEvents.vb" />
+    <Compile Include="DelegateFactory\frmBussy.designer.vb">
+      <DependentUpon>frmBussy.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DelegateFactory\frmBussy.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLive.Designer.vb">
+      <DependentUpon>frmLive.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLive.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmTest.Designer.vb">
+      <DependentUpon>frmTest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmTest.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmTray.Designer.vb">
+      <DependentUpon>frmTray.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmTray.vb" />
+    <Compile Include="mySettings\frmOptions.Designer.vb">
+      <DependentUpon>frmOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="mySettings\frmOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mySettings\frmAdvancedOptions.Designer.vb">
+      <DependentUpon>frmAdvancedOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="mySettings\frmAdvancedOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAbout.designer.vb">
+      <DependentUpon>frmAbout.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmAbout.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mySettings\frmAddClient.designer.vb">
+      <DependentUpon>frmAddClient.vb</DependentUpon>
+    </Compile>
+    <Compile Include="mySettings\frmAddClient.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProjectInfo\frmAddProject.designer.vb">
+      <DependentUpon>frmAddProject.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectInfo\frmAddProject.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProjectInfo\frmEditProject.designer.vb">
+      <DependentUpon>frmEditProject.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectInfo\frmEditProject.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHistory.Designer.vb">
+      <DependentUpon>frmHistory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmHistory.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmLicense.designer.vb">
+      <DependentUpon>frmLicense.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLicense.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Loging and Exception handling\frmLogWindow.designer.vb">
+      <DependentUpon>frmLogWindow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Loging and Exception handling\frmLogWindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mySettings\frmMyFilters.Designer.vb">
+      <DependentUpon>frmMyFilters.vb</DependentUpon>
+    </Compile>
+    <Compile Include="mySettings\frmMyFilters.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProjectInfo\frmPBList.Designer.vb">
+      <DependentUpon>frmPBList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectInfo\frmPBList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmZGRAPH.designer.vb">
+      <DependentUpon>frmZGRAPH.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmZGRAPH.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GlobalSuppressions.vb" />
+    <Compile Include="Modules\modMAIN.vb" />
+    <Compile Include="ProjectInfo\clsProjectInfo.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Forms\SplashScreen.designer.vb">
+      <DependentUpon>SplashScreen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SplashScreen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProjectInfo\pSummary.vb" />
+    <Compile Include="Tools\Tools.vb" />
+    <Compile Include="Notifications\ucNotifyFilter.designer.vb">
+      <DependentUpon>ucNotifyFilter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Notifications\ucNotifyFilter.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Graphing\ucZedGraphContainer.Designer.vb">
+      <DependentUpon>ucZedGraphContainer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Graphing\ucZedGraphContainer.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Graphing\zedGraphGenerator.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DelegateFactory\frmBussy.resx">
+      <DependentUpon>frmBussy.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EOC\frmEOC.resx">
+      <DependentUpon>frmEOC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mySettings\frmGraphSettings.resx">
+      <DependentUpon>frmGraphSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLive.resx">
+      <DependentUpon>frmLive.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmTest.resx">
+      <DependentUpon>frmTest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Loging and Exception handling\diagExceptionIgnoreList.resx">
+      <DependentUpon>diagExceptionIgnoreList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Loging and Exception handling\ExceptionReport.resx">
+      <DependentUpon>ExceptionReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogViewer\frmLogViewer.resx">
+      <DependentUpon>frmLogViewer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mySettings\diagClearSettings.resx">
+      <DependentUpon>diagClearSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mySettings\frmAffinity.resx">
+      <DependentUpon>frmAffinity.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mySettings\frmMail.resx">
+      <DependentUpon>frmMail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Notifications\Notify.resx">
+      <DependentUpon>Notify.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectInfo\ppdGrapher.resx">
+      <DependentUpon>ppdGrapher.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\frmTools.resx">
+      <DependentUpon>frmTools.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmTray.resx">
+      <DependentUpon>frmTray.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mySettings\frmOptions.resx">
+      <DependentUpon>frmOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mySettings\frmAdvancedOptions.resx">
+      <DependentUpon>frmAdvancedOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmAbout.resx">
+      <DependentUpon>frmAbout.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mySettings\frmAddClient.resx">
+      <DependentUpon>frmAddClient.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectInfo\frmAddProject.resx">
+      <DependentUpon>frmAddProject.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectInfo\frmEditProject.resx">
+      <DependentUpon>frmEditProject.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHistory.resx">
+      <DependentUpon>frmHistory.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLicense.resx">
+      <DependentUpon>frmLicense.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Loging and Exception handling\frmLogWindow.resx">
+      <DependentUpon>frmLogWindow.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mySettings\frmMyFilters.resx">
+      <DependentUpon>frmMyFilters.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectInfo\frmPBList.resx">
+      <DependentUpon>frmPBList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmZGRAPH.resx">
+      <DependentUpon>frmZGRAPH.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SplashScreen.resx">
+      <DependentUpon>SplashScreen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Notifications\ucNotifyFilter.resx">
+      <DependentUpon>ucNotifyFilter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Graphing\ucZedGraphContainer.resx">
+      <DependentUpon>ucZedGraphContainer.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\app.manifest">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Resources\iEOC.ico" />
+    <None Include="Resources\iLog.ico" />
+    <None Include="Resources\iStart.ico" />
+    <None Include="Resources\iStop.ico" />
+    <None Include="Resources\iTray.ico" />
+    <None Include="Resources\iWarning.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HWInfo\HWInfo.vbproj">
+      <Project>{B3041FC0-062B-41A2-BE44-69EFB9E4E914}</Project>
+      <Name>HWInfo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LogExtender\LumberJack.vbproj">
+      <Project>{36137EBB-CD9A-46B0-9CDC-FACD7D3720EF}</Project>
+      <Name>LumberJack</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\lspci\lspci.vbproj">
+      <Project>{DF01CDF4-B122-4736-8A1D-DAB782F293B8}</Project>
+      <Name>lspci</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="License and About\About.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="License and About\License.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Other licenses\OpenHardwareMonitorLIB.txt" />
+    <Content Include="Other licenses\WinRing0.License.txt" />
+    <Content Include="Other licenses\ZedGraph License-LGPL.txt" />
+    <Content Include="Resources\TextFile1.txt" />
+    <Content Include="Temp\Old code.txt" />
+    <None Include="Resources\iWarning.bmp" />
+    <None Include="Resources\iTray.bmp" />
+    <None Include="Resources\iStop.bmp" />
+    <None Include="Resources\iStart.bmp" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

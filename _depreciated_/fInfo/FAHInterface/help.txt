@@ -1,0 +1,62 @@
+  auth                        Authenticate.
+  error                       Error message.
+  exit                        Exit the command processor
+  heartbeat                   Prints an increasing hearbeat count.
+  log-updates start | restart | stop Enable(s).
+  get-info <category> <key>   Print application information
+  info                        Print application information in PyON format
+  inject <ip>:<port> <input> [output] [ip:port] Inject a packet file to a
+                              listening de                           will be listed. If the '-a' option is given then
+                              unset options will also be listed. Otherwise, if
+                              option names are provided only those options will
+                     immediately by a '!' then the
+                              option will be reset to its default value.
+                              Options which are set or reset will also be
+                              listed.
+                              Options are   Save the configuration either to the specified
+                              file or to the file the configuration was last
+                              loaded from.
+  shutdown                    Shutdown the application
+  simulation-info <slot id>   Geset
+                              using the same syntax used by the 'options'
+                              command.
+  slot-options <slot> [-d | -a] | [name]... The first argument is the slot ID.
+                              See 'options' help for a desc       Divide two values
+  eval [expr]...              Evaluate all arguments
+  if <cond> <expr1> [expr2]   If 'cond' evaluates to a non-empty string then
+                              evalute 'expr1' otherwise, if provided, evaluate
+                      /diable log updates.
+  quit                        Exit the command processor
+  updates add <id> <rate> <expression> | del <id> | list | clear | reset Enable/disable
+                              updates.
+
+Folding@home Client:
+  bond <ip>:<port> <input> [obug socket. Will wait until packet is
+                              processed.
+  mask-unit-state             Disable specified unit states.
+  option <name> [value]       Get or set a configuration option
+  options                     List or set options wi         be listed.
+                              The special name '*' lists all options which have
+                              not yet been listed and is affected by the '-d'
+                              and '-a' options.
+                               listed as a PyON format dictionary.[-d
+                              | -a] | [<name>[! | =<value>]]...
+  pause [slot]                Pause all or one slot(s).
+  protein <slot id> [$last-update] Get current protein.
+  queue-info                  Get work uet current simulation information.
+  slot-add <type> [<name>=<value>]... Add a new slot. Configuration options for
+                              the new slot can be provided.
+  slot-delete <slot>          Delete a slot. If it is running a unit it will be
+ ription of the
+                              remaining arguments.
+  unpause [slot]              Unpause all or one slot(s).
+  uptime                      Print application uptime
+  wait-for-units              Wait for all running units to finish.
+
+Standard        'expr2'
+  mul <number> <number>       Multiply two values
+  not <expr>                  Invert the truth value of the argument
+  sleep <seconds>             Sleep for a number of seconds
+  sub <number> <number>       Subtract two values
+> 
+Standard

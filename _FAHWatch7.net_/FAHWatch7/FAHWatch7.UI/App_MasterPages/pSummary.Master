@@ -1,0 +1,122 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" Inherits="FAHWatch7.UI.pSummary" %>
+
+<%@ Import Namespace="FAHWatch7.Business" %>
+
+<%@ Import Namespace= "FAHWatch7.Business.FAHWatch7.Business"  %>
+<%@ Import Namespace="mojoPortal.Business" %>
+<%@ Import Namespace="mojoPortal.Business.WebHelpers" %>
+<%@ Import Namespace="mojoPortal.Web.Framework" %>
+<%@ Import Namespace="mojoPortal.Web.Controls" %>
+<%@ Import Namespace="mojoPortal.Web.UI" %>
+<%@ Import Namespace="mojoPortal.Web.Editor" %>
+<%@ Import Namespace="mojoPortal.Net" %>
+<%@ Import Namespace ="log4net" %>
+
+<script runat="server" >
+    Private Shared log As log4net.ILog = log4net.LogManager.GetLogger("pSummary.Master")
+    
+    Sub Load(sender As Object, e As EventArgs) Handles ContentPlaceHolder1.Load
+        Try
+            Dim dtPageLoadStart As DateTime = DateTime.Now
+            If String.Equals(CType(sender, ContentPlaceHolder).Page.AppRelativeVirtualPath, "~/psummary/psummarypage.aspx", StringComparison.InvariantCultureIgnoreCase) Then
+                'Menu1.Items(1).Selectable = False : Menu1.Items(2).Selectable = True
+            ElseIf String.Equals(CType(sender, ContentPlaceHolder).Page.AppRelativeVirtualPath, "~/psummary/psummarypaged.aspx", StringComparison.InvariantCultureIgnoreCase) Then
+                'Menu1.Items(1).Selectable = True : Menu1.Items(2).Selectable = False
+            ElseIf String.Equals(CType(sender, ContentPlaceHolder).Page.AppRelativeVirtualPath, "~/psummary/psummaryconfig.aspx", StringComparison.CurrentCultureIgnoreCase) Then
+                'Menu1.Items(1).Selectable = True : Menu1.Items(2).Selectable = True : Menu1.Items(4).Selectable = False
+            End If
+            If mojoPortal.Business.WebHelpers.WebUser.IsAdmin Then
+                If Not String.Equals(Menu1.Items(Menu1.Items.Count - 1).Text, "Configure", StringComparison.InvariantCultureIgnoreCase) Then
+                    Dim aMenu As New MenuItem
+                    aMenu.NavigateUrl = "~/pSummary/pSummaryConfigure.aspx"
+                    aMenu.Target = "_self"
+                    aMenu.ToolTip = "Configure the pSummary parser settings"
+                    Menu1.Items.Add(aMenu)
+                End If
+            Else
+                If String.Equals(Menu1.Items(Menu1.Items.Count - 1).Text, "Configure", StringComparison.InvariantCultureIgnoreCase) Then
+                    Menu1.Items.RemoveAt(Menu1.Items.Count - 1)
+                End If
+            End If
+            If Not IsNothing(lblGenerated) Then lblGenerated.Text = "Page generated at " & DateTime.UtcNow & "(utc) generation took " & Formatting.Format_ts(DateTime.Now.Subtract(dtPageLoadStart), True)
+        Catch ex As Exception
+            log.Error(ex)
+            Context.Response.Clear()
+            Context.Response.Redirect("~/errorpage.aspx")
+        End Try
+    End Sub
+
+    Sub MenuItemClick(sender As Object, e As System.Web.UI.WebControls.MenuEventArgs)
+        Try
+            If e.Item.Text = "Configure" AndAlso Not mojoPortal.Business.WebHelpers.WebUser.IsAdmin Then
+                log.Warn("Attempt to acces pSummaryConfiguration by non authenticated user")
+                SiteUtils.RedirectToAccessDeniedPage()
+            End If
+        Catch ex As Exception
+            log.Error(ex)
+            Context.Response.Clear()
+            Context.Response.Redirect("~/errorpage.aspx")
+        End Try
+    End Sub
+</script>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+       <portal:SiteSlogan runat ="server" />
+    </asp:ContentPlaceHolder>
+</head>
+<body style=" background-color: #B5C7DE;" onload="return window_onload()">
+    <form id="form1" runat="server">
+    <asp:Menu ID="Menu1" runat="server" BackColor="#E3EAEB" 
+        DynamicHorizontalOffset="2" Font-Names="Verdana" Font-Size="0.8em" 
+        foreColor="#666666" Orientation="Horizontal" StaticSubMenuIndent="10px" 
+        onMenuItemClick="MenuItemClick" StaticHoverStyle-BackColor="#4234" 
+        StaticHoverStyle-BorderColor = "#ff0004" 
+        DynamicSelectedStyle-BorderColor ="#C6FF00" StaticSelectedStyle-BorderColor = "#c6ff00"
+         DynamicHoverStyle-BackColor="#4234" 
+        DynamicHoverStyle-BorderColor="#FF0004" ItemWrap ="True" 
+        >
+<DynamicHoverStyle BackColor="#666666" BorderColor="#FF0004" ForeColor="White"></DynamicHoverStyle>
+
+        <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+        <DynamicMenuStyle BackColor="#E3EAEB" />
+
+<DynamicSelectedStyle BorderColor="#C6FF00" BackColor="#1C5E55"></DynamicSelectedStyle>
+        <Items>
+            <asp:MenuItem NavigateUrl="~/Default.aspx" Text="FAHWatch7" Value="FAHWatch7" ToolTip ="Back to FAHWatch7.net" Target="_top" />
+            <asp:MenuItem NavigateUrl="~/pSummary/pSummaryPage.aspx?current" Text="Project summary" Value="Project summary" Target="_self" >
+                <asp:MenuItem Text="Export" NavigateUrl="~/pSummary/downloadSummary.ashx?current" Target ="_blank" Value="Export summary" />
+            </asp:MenuItem>
+            <asp:MenuItem NavigateUrl="~/pSummary/pSummaryPage.aspx?changelog" Text="Change log" Value="Change log" Target="_self" >
+                <asp:MenuItem Text="Export" NavigateUrl="~/pSummary/downloadSummary.ashx?changelog" Target="_blank" Value="Export change log" /> 
+            </asp:MenuItem>
+            <asp:MenuItem Target="_SELF" Text="Calculator" Value="Calculator" navigateurl="~/pSummary/Calculator.aspx" />
+        </Items>
+        <StaticHoverStyle BackColor="#666666" BorderColor="#FF0004" ForeColor="White" />
+        <DynamicHoverStyle  BackColor="#666666" BorderColor="#FF0004" ForeColor="White" />
+        <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+        <DynamicMenuItemStyle  HorizontalPadding="5px" VerticalPadding="2px" />
+        <StaticSelectedStyle BorderColor="#C6FF00" BackColor="#1C5E55" />
+        <DynamicSelectedStyle BorderColor="#C6FF00" BackColor="#1C5E55" />
+
+    </asp:Menu>
+    <br />
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+        <div align="right" >
+        <asp:Label ID="lblGenerated" Font-size="Small"  Font-Italic="True" 
+                runat = "server" />
+        </div>   
+    </div>
+    </form>
+</body>
+
+</html>

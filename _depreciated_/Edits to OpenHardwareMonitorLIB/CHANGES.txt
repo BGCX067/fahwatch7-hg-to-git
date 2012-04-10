@@ -1,0 +1,7 @@
+Changes to openhardwaremonitorlib.csjproject
+
+9-10-2010 Marvin Westmaas
+
+I exposed the sensor interface to 3rd party application which wish to link to openhardwaremonitorlib.dll.
+
+Original source code is available on http://code.google.com/p/open-hardware-monitor

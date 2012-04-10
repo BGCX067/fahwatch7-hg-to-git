@@ -1,0 +1,15 @@
+fTray uses these 3rd party external libraries which are named by version and their licenses linked when applied.
+
+Lgpl libraries:
+
+- OpenHardwareMonitorLib.dll 0.2.1.0 http://openhardwaremonitor.org/license.php which also covers the WinRing0 dll's ( dependency )
+
+- Zedgraph.dll 5.1.5.28844 http://zedgraph.org/wiki/index.php?title=LGPL_License
+
+Free to use: 
+
+- openCLnet.dll 0.6.3 http://www.hoopoe-cloud.com/Solutions/opencl.net
+
+
+
+

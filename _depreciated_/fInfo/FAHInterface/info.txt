@@ -1,0 +1,147 @@
+PyON 1 info
+[
+  [
+    "Folding@home Client",
+    [
+      "Website",
+      "http://folding.stanford.edu/"
+    ],
+    [
+      "Copyright",
+      "(c) 2009,2010 Stanford University"
+    ],
+    [
+      "Author",
+      "Joseph Coffland <joseph@cauldrondevelopment.com>"
+    ],
+    [
+      "Args",
+      " --lifeline 3564 --command-port=36330"
+    ],
+    [
+      "Config",
+      "C:/Users/Home Theater/AppData/Roaming/FAHClient/config.xml"
+    ]
+  ],
+  [
+    "Build",
+    [
+      "Version",
+      "7.1.24"
+    ],
+    [
+      "Date",
+      "Apr  6 2011"
+    ],
+    [
+      "Time",
+      "21:37:58"
+    ],
+    [
+      "SVN Rev",
+      "2908"
+    ],
+    [
+      "Branch",
+      "fah/trunk/client"
+    ],
+    [
+      "Compiler",
+      "Intel(R) C++ MSVC 1500 mode 1110"
+    ],
+    [
+      "Options",
+      "/TP /nologo /EHa /wd4297 /wd4103 /wd1786 /Ox -arch:SSE2 /QaxSSE3,SSSE3,SSE4.1,SSE4.2 /Qrestrict /MT"
+    ],
+    [
+      "Platform",
+      "win32 Vista"
+    ],
+    [
+      "Bits",
+      "32"
+    ],
+    [
+      "Mode",
+      "Release"
+    ]
+  ],
+  [
+    "System",
+    [
+      "OS",
+      "Microsoft Windows 7 Ultimate"
+    ],
+    [
+      "CPU",
+      "Intel(R) Pentium(R) Dual  CPU  E2160  @ 1.80GHz"
+    ],
+    [
+      "CPU ID",
+      "GenuineIntel Family 6 Model 15 Stepping 13"
+    ],
+    [
+      "CPUs",
+      "2"
+    ],
+    [
+      "Memory",
+      "1.48GiB"
+    ],
+    [
+      "Free Memory",
+      "522.04MiB"
+    ],
+    [
+      "Threads",
+      "WINDOWS_THREADS"
+    ],
+    [
+      "GPUs",
+      "2"
+    ],
+    [
+      "GPU 0",
+      "ATI:3 RV710 [Radeon HD 4350]"
+    ],
+    [
+      "GPU 1",
+      "ATI:3 RV710/730"
+    ],
+    [
+      "CUDA",
+      "Not detected"
+    ],
+    [
+      "On Battery",
+      "false"
+    ],
+    [
+      "UTC offset",
+      "2"
+    ],
+    [
+      "PID",
+      "3468"
+    ],
+    [
+      "CWD",
+      "C:/Users/Home Theater/AppData/Roaming/FAHClient"
+    ],
+    [
+      "Win32 Service",
+      "false"
+    ]
+  ]
+]
+---
+> Battery",
+      "false"
+    ],
+    [
+      "UTC offset",
+      "2"
+    ],
+    [
+      "PID",
+      "346

@@ -1,0 +1,129 @@
+PyON 1 info
+[
+  [
+    "Folding@home Client",
+    [
+      "Website",
+      "http://folding.stanford.edu/"
+    ],
+    [
+      "Copyright",
+      "(c) 2009,2010 Stanford University"
+    ],
+    [
+      "Author",
+      "Joseph Coffland <joseph@cauldrondevelopment.com>"
+    ],
+    [
+      "Args",
+      " --lifeline 12396"
+    ],
+    [
+      "Config",
+      "<none>"
+    ]
+  ],
+  [
+    "Build",
+    [
+      "Version",
+      "7.1.17"
+    ],
+    [
+      "Date",
+      "Feb 20 2011"
+    ],
+    [
+      "Time",
+      "01:57:17"
+    ],
+    [
+      "SVN Rev",
+      "2829"
+    ],
+    [
+      "Branch",
+      "fah/trunk/client"
+    ],
+    [
+      "Compiler",
+      "Intel(R) C++ MSVC 1500 mode 1110"
+    ],
+    [
+      "Options",
+      "/TP /nologo /EHa /wd4297 /wd4103 /wd1786 /arch:IA32 /Ox /QaxSSE2,SSE3,SSSE3,SSE4.1,SSE4.2 /Qrestrict /MT"
+    ],
+    [
+      "Platform",
+      "win32 XP"
+    ],
+    [
+      "Bits",
+      "32"
+    ],
+    [
+      "Mode",
+      "Release"
+    ]
+  ],
+  [
+    "System",
+    [
+      "OS",
+      "Microsoft Windows 7 Ultimate"
+    ],
+    [
+      "CPU",
+      "Intel(R) Core(TM)2 Quad CPU    Q6600  @ 2.40GHz"
+    ],
+    [
+      "CPU ID",
+      "GenuineIntel Family 6 Model 15 Stepping 11"
+    ],
+    [
+      "CPUs",
+      "1 Physical x 4 Cores x 1 Thread = 4 Logical"
+    ],
+    [
+      "Memory",
+      "8.00GiB"
+    ],
+    [
+      "Free Memory",
+      "3.87GiB"
+    ],
+    [
+      "Threads",
+      "WINDOWS_THREADS"
+    ],
+    [
+      "GPUs",
+      "1"
+    ],
+    [
+      "GPU 0",
+      "NVIDIA:1 G94 [GeForce 9600 GT]"
+    ],
+    [
+      "CUDA",
+      "1.1"
+    ],
+    [
+      "CUDA Driver",
+      "3020"
+    ],
+    [
+      "On Battery",
+      "false"
+    ],
+    [
+      "UTC offset",
+      "2"
+    ],
+    [
+      "PID",
+      "6328"
+    ],
+    [
+      "CWD",
+      "C:/Pro

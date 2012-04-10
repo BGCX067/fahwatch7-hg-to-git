@@ -1,0 +1,45 @@
+Welcome to the Folding@home Client command server.
+                                                  > queue-in
+fo
+PyON 1 units
+            [
+               {
+                    "id": "01",
+                                   "state": "RUNNING",
+                                                          "p
+roject": 11020,
+                   "run": 0,
+                                "clone": 9090,
+                                                  "gen": 0,
+
+   "core": "0xa3",
+                      "unit": "0x000000000a3b1e5b4d824e0312a
+3e59f",
+           "percentdone": "51.00%",
+                                       "totalframes": 1000,
+
+   "framesdone": 510,
+                         "assigned": "06/Apr/2011-11:52:59",
+
+    "timeout": "14/Apr/2011-11:52:59",
+                                          "deadline": "18/Ap
+r/2011-11:52:59",
+                     "ws": "171.64.65.55",
+                                              "cs": "171.67.
+108.26",
+            "waitingon": "",
+                                "attempts": 0,
+                                                  "nextattem
+pt": "0.00 secs",
+                     "slot": 0,
+                                   "eta": "3 hours 50 mins",
+
+    "ppd": "939.23",
+                        "tpf": "4 mins 45 secs",
+                                                    "basecre
+dit": "310.00",
+                   "creditestimate": "310.00"
+                                               }
+                                                ]
+                                                 ---
+                                                    >

@@ -1,0 +1,10 @@
+[11/27/2011] * 3:43:18 AM - ****** FixConfig 1.0.0.3 logging started ******
+[11/27/2011] * 3:43:19 AM - OpenHardwareMonitorLib interface started
+[11/27/2011] * 3:43:20 AM - OpenHardwareMonitorLib succesfully reported hardware
+[11/27/2011] * 3:43:20 AM - Gpgpu detection started
+[11/27/2011] * 3:43:20 AM - openCL detected!
+[11/27/2011] * 3:43:20 AM - CUDA detected!
+[11/27/2011] * 3:43:20 AM - CAL detected!
+[11/27/2011] * 3:43:20 AM - Getting environment information:
+[11/27/2011] * 3:43:21 AM - Administrator rights detected.
+[11/27/2011] * 3:43:21 AM - Platform: Windows7

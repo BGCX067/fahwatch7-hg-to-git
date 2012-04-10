@@ -1,0 +1,368 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C0F5AEE1-C9F1-4343-AA8F-B95DEAB6854F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Sub Main</StartupObject>
+    <RootNamespace>fTray</RootNamespace>
+    <AssemblyName>fTray</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>H:\TESTING\</OutputPath>
+    <DocumentationFile>fTray.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>fTray.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>max.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="OpenCLNet">
+      <HintPath>.\OpenCLNet.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenHardwareMonitorLib_mod, Version=0.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>.\OpenHardwareMonitorLib_mod.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.66.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="ZedGraph">
+      <HintPath>.\ZedGraph.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutBox.Designer.vb">
+      <DependentUpon>AboutBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AboutBox.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="clsClientControl.vb" />
+    <Compile Include="clsEOC.vb" />
+    <Compile Include="clsHWinfo.vb" />
+    <Compile Include="clsLogWindow.vb" />
+    <Compile Include="clsProjectInfo.vb" />
+    <Compile Include="clsQueue.vb" />
+    <Compile Include="clsSettings.vb" />
+    <Compile Include="clsStatistics.vb" />
+    <Compile Include="dialogElevate.Designer.vb">
+      <DependentUpon>dialogElevate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dialogElevate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddNF.Designer.vb">
+      <DependentUpon>frmAddNF.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddNF.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddProject.designer.vb">
+      <DependentUpon>frmAddProject.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddProject.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfig.designer.vb">
+      <DependentUpon>frmConfig.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmConfig.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEditProject.designer.vb">
+      <DependentUpon>frmEditProject.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEditProject.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEOC.Designer.vb">
+      <DependentUpon>frmEOC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEOC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEUE.designer.vb">
+      <DependentUpon>frmEUE.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEUE.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLOG.Designer.vb">
+      <DependentUpon>frmLOG.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLOG.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogOutput.designer.vb">
+      <DependentUpon>frmLogOutput.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogOutput.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogWindow.designer.vb">
+      <DependentUpon>frmLogWindow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogWindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOptions.Designer.vb">
+      <DependentUpon>frmOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPBList.designer.vb">
+      <DependentUpon>frmPBList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPBList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPBStatus.Designer.vb">
+      <DependentUpon>frmPBStatus.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPBStatus.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEOCStats.Designer.vb">
+      <DependentUpon>frmEOCStats.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEOCStats.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTest.Designer.vb">
+      <DependentUpon>frmTest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmTest.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="modMAIN.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="frmUseAnonymous.Designer.vb">
+      <DependentUpon>frmUseAnonymous.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUseAnonymous.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AboutBox.resx">
+      <DependentUpon>AboutBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogElevate.resx">
+      <DependentUpon>dialogElevate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddNF.resx">
+      <DependentUpon>frmAddNF.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddProject.resx">
+      <DependentUpon>frmAddProject.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConfig.resx">
+      <DependentUpon>frmConfig.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditProject.resx">
+      <DependentUpon>frmEditProject.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEOC.resx">
+      <DependentUpon>frmEOC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEUE.resx">
+      <DependentUpon>frmEUE.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLOG.resx">
+      <DependentUpon>frmLOG.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogOutput.resx">
+      <DependentUpon>frmLogOutput.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogWindow.resx">
+      <DependentUpon>frmLogWindow.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOptions.resx">
+      <DependentUpon>frmOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPBList.resx">
+      <DependentUpon>frmPBList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPBStatus.resx">
+      <DependentUpon>frmPBStatus.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEOCStats.resx">
+      <DependentUpon>frmEOCStats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTest.resx">
+      <DependentUpon>frmTest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUseAnonymous.resx">
+      <DependentUpon>frmUseAnonymous.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="WinRing0.sys">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="WinRing0x64.sys">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Folding%40home-Win32-x86.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LEGAL\LEGAL.txt" />
+    <Content Include="LEGAL\OpenHardwareMonitor.License.txt" />
+    <Content Include="LEGAL\WinRing0.License.txt" />
+    <Content Include="max.ico" />
+    <Content Include="WinRing0.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WinRing0x64.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="OpenHardwareMonitorLib_mod.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <None Include="Resources\fTray_EOC.ico" />
+    <None Include="Resources\About.txt" />
+    <None Include="LICENSE" />
+    <None Include="Resources\fTray_Warning.ico" />
+    <None Include="Resources\fTray_stop.ico" />
+    <None Include="Resources\fTray_Start.ico" />
+    <None Include="Resources\fTray_Log.ico" />
+    <None Include="Resources\fTray.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.SQL.Server.Compact.3.5">
+      <Visible>False</Visible>
+      <ProductName>SQL Server Compact 3.5 SP2</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

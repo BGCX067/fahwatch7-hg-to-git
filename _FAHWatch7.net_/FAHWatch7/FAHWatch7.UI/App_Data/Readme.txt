@@ -1,0 +1,1 @@
+These SQLCe files are no longer being developed against but still included. I tried using them since I have a limit amount of MySQL storage available, and much more disk quota, but I can't configure appropiate rights for the hosting account to allow write access to specific folders. If I'm out of database space, I would probably need to store data in an (ugh..) Access database.

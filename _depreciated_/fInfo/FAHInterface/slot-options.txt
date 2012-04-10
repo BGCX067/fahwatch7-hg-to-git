@@ -1,0 +1,6 @@
+PyON 1 slot-options
+{
+  "extra-core-args": "gpu gpuspecies ati_r700"
+}
+---
+> 

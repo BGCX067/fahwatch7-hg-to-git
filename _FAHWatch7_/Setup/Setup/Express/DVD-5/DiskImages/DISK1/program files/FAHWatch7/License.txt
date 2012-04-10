@@ -1,0 +1,32 @@
+﻿?/*
+  
+  Version: GPL 2.0
+
+  Software distributed under the License is distributed on an "AS IS" basis,
+  WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+  for the specific language governing rights and limitations under the License.
+
+  The Original Code is the FAHWatch7 code
+
+  The Initial Developer of the Original Code is 
+  Marvin Westmaas <FAHWatch7@Hotmail.com>.
+  Portions created by the Initial Developer are Copyright (C) 2010-2011
+  the Initial Developer. All Rights Reserved.
+
+  Contributor(s):
+  
+  
+  3rd party libraries and implementations:
+
+  Uses OpenHardwaremonitorLib.dll - http://code.google.com/p/open-hardware-monitor/
+  Uses zedGraph - http://sourceforge.net/projects/zedgraph/
+  Uses sqlite - http://www.sqlite.org/copyright.html
+  Uses portions of 'simple network browser' - http://www.codeproject.com/KB/vb/Simple_Network_Browser.aspx
+  Uses portions of 'networkinformation', written by richard_deeming and posted -> http://forums.devx.com/archive/index.php/t-145593.html
+  Uses net share enum from pinvoke - http://www.pinvoke.net/default.aspx/netapi32.netshareenum
+  Implements a conversion of - http://www.xoc.net/works/tips/folderbrowserdialog.asp
+  The listviewcolumn sort code is based on msdn -> http://support.microsoft.com/kb/319401
+  -- expanded with the numerical and datetime sorting from -> http://www.vb-helper.com/howto_net_listview_sort_clicked_column.html
+  ClientConfig/ClientInfo classes are based on harlam357's initial checkin -> http://code.google.com/p/hfm-net/source/detail?r=342
+
+*/

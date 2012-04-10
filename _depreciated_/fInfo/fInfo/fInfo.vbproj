@@ -1,0 +1,394 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{232F43AB-2BDB-4F0E-8BC9-1B295FC0A0C6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Sub Main</StartupObject>
+    <RootNamespace>fInfo</RootNamespace>
+    <AssemblyName>fInfo</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>..\Release\</OutputPath>
+    <DocumentationFile>fInfo.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Release\</OutputPath>
+    <DocumentationFile>fInfo.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>fInfo.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>fInfo.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>..\Release\</OutputPath>
+    <DocumentationFile>fInfo.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DocumentationFile>fInfo.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="OpenHardwareMonitorLib, Version=0.3.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\fInfo\External\OpenHardwareMonitorLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="clsAbout.vb" />
+    <Compile Include="clsControl.vb" />
+    <Compile Include="clsEOC.vb" />
+    <Compile Include="clsExtClient.vb" />
+    <Compile Include="clsLogwindow.vb" />
+    <Compile Include="clsLSPCI.vb" />
+    <Compile Include="clsProjectInf.vb" />
+    <Compile Include="clsSettings.vb" />
+    <Compile Include="diaMAIN.designer.vb">
+      <DependentUpon>diaMAIN.vb</DependentUpon>
+    </Compile>
+    <Compile Include="diaMAIN.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAbout.designer.vb">
+      <DependentUpon>frmAbout.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAbout.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddProject.designer.vb">
+      <DependentUpon>frmAddProject.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddProject.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmControl.Designer.vb">
+      <DependentUpon>frmControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmControl.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDownload.designer.vb">
+      <DependentUpon>frmDownload.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDownload.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEditProject.designer.vb">
+      <DependentUpon>frmEditProject.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEditProject.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEOC.designer.vb">
+      <DependentUpon>frmEOC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEOC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogOutput.Designer.vb">
+      <DependentUpon>frmLogOutput.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogOutput.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPBList.Designer.vb">
+      <DependentUpon>frmPBList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPBList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSettings.Designer.vb">
+      <DependentUpon>frmSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogWindow.Designer.vb">
+      <DependentUpon>frmLogWindow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogWindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTEST.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTEST.Designer.vb">
+      <DependentUpon>frmTEST.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="modMAIN.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="diaMAIN.resx">
+      <DependentUpon>diaMAIN.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAbout.resx">
+      <DependentUpon>frmAbout.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddProject.resx">
+      <DependentUpon>frmAddProject.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmControl.resx">
+      <DependentUpon>frmControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDownload.resx">
+      <DependentUpon>frmDownload.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditProject.resx">
+      <DependentUpon>frmEditProject.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEOC.resx">
+      <DependentUpon>frmEOC.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogOutput.resx">
+      <DependentUpon>frmLogOutput.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPBList.resx">
+      <DependentUpon>frmPBList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSettings.resx">
+      <DependentUpon>frmSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogWindow.resx">
+      <DependentUpon>frmLogWindow.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTEST.resx">
+      <DependentUpon>frmTEST.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data\Data.vbproj">
+      <Project>{055BF885-FFCD-4F40-A43F-96E4D3772BA6}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FAHInterface\FAHInterface\FAHInterface.vbproj">
+      <Project>{1B7D8EDB-E1F6-4BFD-8200-9BD361794B8C}</Project>
+      <Name>FAHInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GpuInfo\gpuInfo.vbproj">
+      <Project>{723A9873-C46A-4822-908B-E481C8F5EA3C}</Project>
+      <Name>gpuInfo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HWInfo\HWInfo.vbproj">
+      <Project>{B3041FC0-062B-41A2-BE44-69EFB9E4E914}</Project>
+      <Name>HWInfo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProjectInfo\ProjectInfo.vbproj">
+      <Project>{91C412BF-3936-450F-B88F-CC97BAC150A5}</Project>
+      <Name>ProjectInfo</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fTray.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fTray_EOC.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fTray_Log.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fTray_Start.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fTray_stop.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fTray_Warning.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Red.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Yellow.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iRun.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TRFFC10A.ICO" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TRFFC10B.ICO" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TRFFC10C.ICO" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Carbon copy.BMP" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close button mouse down.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close button mouse over.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close button.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\diagListbox.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dialog.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Help button mouse down.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Help button mouse over.BMP" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Help button.BMP" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Min button mouse down.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Min button mouse over.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Min button.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pCarbon.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UI.BMP" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Settings.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
